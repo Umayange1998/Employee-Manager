@@ -39,6 +39,8 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Long id) {
-        employeeRepo.deleteEmployeeById(id);
+  if (!employeeRepo.existsById(id)) {
+        throw new IllegalArgumentException("Employee with ID " + id + " not found");
     }
+    employeeRepo.deleteById(id);    }
 }
